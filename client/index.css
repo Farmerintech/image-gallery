@@ -97,11 +97,10 @@ header{
     }
     .toggle-menu img, .toggle-cancle img{
         width: 20px;
-        cursor: pointer;
     }
     .toggle-cancle{
-        position: sticky;
-        right:10px;
+        position: absolute;
+        left:10px;
         top:10px;
 
     }
