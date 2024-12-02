@@ -100,7 +100,7 @@ header{
         cursor: pointer;
     }
     .toggle-cancle{
-        position: fixed;
+        position: sticky;
         right:10px;
         top:10px;
 
