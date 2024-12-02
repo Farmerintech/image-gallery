@@ -10,7 +10,7 @@ export const connectCloud = () => {
     console.log('Cloudinary connected');
 };
 
-export const uploadImage = async (req, res) => {
+export const uploadImagde = async (req, res) => {
     try {
         const image = req.file;
         const user = req.user; // Assuming authentication middleware sets req.user
