@@ -233,8 +233,6 @@ submitBtn.onsubmit = (e)=>{
 }
  
 }
-
-
 const fetchApi = async (URL, formData)=>{
     try {
        const resp = await fetch(URL, {
@@ -250,6 +248,9 @@ const fetchApi = async (URL, formData)=>{
       //  console.log(data)  
        msg.innerText= data.message 
        localStorage.setItem('token', data.token);
+       setTimeout(()=>{
+         localStorage.setItem('token', '');
+       })
        msg.style.color='green';
        if(resp.ok){
          navigate('gallery')
@@ -260,9 +261,7 @@ const fetchApi = async (URL, formData)=>{
     }
 
  }
- setTimeout(()=>{
-   localStorage.setItem('token', '');     
-}, 36000)
+
       if(page==='register' || cPage==='register'){
         current.innerHTML= `<section class="login section">
         <p>Register</p>
