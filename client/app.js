@@ -254,7 +254,7 @@ const fetchApi = async (URL, formData, page)=>{
        localStorage.setItem('token', data.token);
        setTimeout(()=>{
          localStorage.setItem('token', '');
-       })
+       }, 360000)
        msg.style.color='green';
        if(resp.ok){
          navigate(page)
