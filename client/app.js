@@ -169,7 +169,7 @@ displayImages()
                msg.style.color='green'
             }
            } catch (error) {
-            msg.innerText= 'You are not logged in, please log in first' 
+            msg.innerText= 'server error' 
             console.log(error)
            }
         }
