@@ -13,7 +13,7 @@ app.use(express.urlencoded({extended:false}))
 app.use(express.json())
 
 app.use("/api/v1/auth", authRoute)
-app.use("/api/vi/uploads", uploadRoute);
+app.use("/api/v1/uploads", uploadRoute);
 app.use("/api/v1/users", userRoute)
 app.use(express.static('client'))
 

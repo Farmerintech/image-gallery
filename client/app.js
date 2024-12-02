@@ -61,6 +61,19 @@ const upload = document.querySelector('.upl');
 const login = document.querySelector('.log');
 const reg = document.querySelector('.reg');
 
+current.innerHTML =
+`<section class="hero">
+   <div class="">
+    <h2 class="hero-title">Get <span class="sixty">60%</span> jackpot deal on all outfits</h2>
+   <p class="hero-text">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vulputate, risus nec vestibulum blandit, enim ex placerat erat, id luctus purus justo eget mauris. 
+  </p>
+  <button class="hero-btn">Shop Now</button>
+  </div>
+  <div class="hero-img">
+    <img src="assets/hero.png" alt="" class="">
+  </div>
+</section>`
 
 const navigate = (page, cPage)=>{
    document.title=page;
@@ -85,7 +98,7 @@ const navigate = (page, cPage)=>{
             const imageGallery = document.getElementById('image-gallery');
       displayImages= async ()=>{
       try {
-         const resp = await fetch('http://localhost:8000/api/vi/uploads')
+         const resp = await fetch('/api/v1/uploads')
          const data = await resp.json();
          // console.log(data)  
          for (const img of data.images){
@@ -172,7 +185,7 @@ displayImages()
            formData.append('image', fileInput.files[0]); // 'image' matches multer's field name
            formData.append('name', imageName.value);
            formData.append('description', description.value);
-           UploadApi('http://localhost:8000/api/vi/uploads', formData)
+           UploadApi('/api/v1/uploads', formData)
         }
         
         
@@ -216,10 +229,12 @@ submitBtn.onsubmit = (e)=>{
       username:username.value,
       password:password.value
    }
-   fetchApi('http://localhost:8000/api/v1/auth/login', formData)
+   fetchApi('/api/v1/auth/login', formData)
 }
  
 }
+
+
 const fetchApi = async (URL, formData)=>{
     try {
        const resp = await fetch(URL, {
@@ -245,7 +260,9 @@ const fetchApi = async (URL, formData)=>{
     }
 
  }
-
+ setTimeout(()=>{
+   localStorage.setItem('token', '');     
+}, 36000)
       if(page==='register' || cPage==='register'){
         current.innerHTML= `<section class="login section">
         <p>Register</p>
@@ -284,7 +301,7 @@ submitBtn.onsubmit = (e)=>{
       username:username.value,
       password:password.value
    }
- fetchApi('https://image-gallery-e7lb.onrender.com/register', formData)
+ fetchApi('/api/v1/auth/register', formData)
 
     }
       }
