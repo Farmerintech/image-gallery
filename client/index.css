@@ -1,5 +1,8 @@
 html, body{
     margin: 0;
+        font-family: "Poppins", serif;
+        font-weight: 500;
+        font-style: normal;
 } 
 /* header style */
 header{
@@ -123,12 +126,12 @@ header{
 }
 
 .hero-title {
-    font-size: 2rem;
+    font-size: 1.4rem;
     margin-bottom: 10px;
 }
 
 .hero-text {
-    font-size: 1rem;
+    font-size: 0.6rem;
     margin-bottom: 20px;
 }
 
