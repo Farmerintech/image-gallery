@@ -3,9 +3,9 @@ import UploadModel from "../model/upload.model.js";
 
 export const connectCloud = () => {
     cloudinary.config({
-        cloud_name: process.env.CLOUD_NAME || dtsiyyvu1,
-        api_key: process.env.API_KEY || 221554665271299,
-        api_secret: process.env.API_SECRET || -52nBO2q64b55uJE8AYTNw_sQOE, // Fixed typo
+        cloud_name: process.env.CLOUD_NAME || 'dtsiyyvu1',
+        api_key: process.env.API_KEY || '221554665271299',
+        api_secret: process.env.API_SECRET || '-52nBO2q64b55uJE8AYTNw_sQOE' // Fixed typo
     });
     console.log('Cloudinary connected');
 };
