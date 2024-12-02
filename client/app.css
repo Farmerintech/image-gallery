@@ -32,6 +32,10 @@ li, a{
     margin-top: 20px;
     padding: 10px;
 }
+
+#image-gallery p{
+    width:100px;
+}
 #image-gallery img{
     width:200px;
     height:200px;
