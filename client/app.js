@@ -116,7 +116,8 @@ const navigate = (page, cPage)=>{
 }
 displayImages()
 
-    }
+ }
+
     if(page==='upload' || cPage==='upload'){
         current.innerHTML=
             `<section id="upload">
@@ -229,11 +230,11 @@ submitBtn.onsubmit = (e)=>{
       username:username.value,
       password:password.value
    }
-   fetchApi('/api/v1/auth/login', formData)
+   fetchApi('/api/v1/auth/login', formData, 'gallery')
 }
  
 }
-const fetchApi = async (URL, formData)=>{
+const fetchApi = async (URL, formData, page)=>{
     try {
        const resp = await fetch(URL, {
           method:"POST",
@@ -253,7 +254,7 @@ const fetchApi = async (URL, formData)=>{
        })
        msg.style.color='green';
        if(resp.ok){
-         navigate('gallery')
+         navigate(page)
        }
     } catch (error) {
        msg.innerText= error 
@@ -300,7 +301,7 @@ submitBtn.onsubmit = (e)=>{
       username:username.value,
       password:password.value
    }
- fetchApi('/api/v1/auth/register', formData)
+ fetchApi('/api/v1/auth/register', formData, 'login')
 
     }
       }
@@ -325,6 +326,9 @@ reg.addEventListener('click', ()=>{
 })
 
 upload.addEventListener('click', ()=>{
+   if(!token || token===''){
+      navigate('login')
+   }   
     navigate('upload')
     localStorage.setItem('current', 'upload')
     if(window.screen.width<=786){navList.style.display="none"}
