@@ -76,6 +76,9 @@ header{
     .nav-header{
         justify-content: space-around;
     }
+    .nav-list ul {
+        margin-top: 50px;
+    }
     .nav-list{
         display: none;
         position: fixed;
@@ -99,8 +102,8 @@ header{
         width: 20px;
     }
     .toggle-cancle{
-        position: absolute;
-        left:10px;
+        position: fixed;
+        right:10px;
         top:10px;
 
     }
