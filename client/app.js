@@ -159,9 +159,7 @@ displayImages()
                  },
                  body: formData
               })
-              if(!resp.ok){
-               msg.innerText= 'You are not logged in, please log in first' 
-              }
+              
               const data = await resp.json();
               console.log(data)  
               if(resp.ok){
