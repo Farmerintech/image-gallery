@@ -284,7 +284,7 @@ submitBtn.onsubmit = (e)=>{
       username:username.value,
       password:password.value
    }
- fetchApi('http://localhost:8000/api/v1/auth/register', formData)
+ fetchApi('https://image-gallery-e7lb.onrender.com/register', formData)
 
     }
       }
