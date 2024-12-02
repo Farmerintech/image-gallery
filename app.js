@@ -7,7 +7,6 @@ import userRoute from "./route/user.route.js"
 const PORT = process.env.PORT || 8000
 
 const app = express()
-
 connectDB()
 app.use(express.urlencoded({extended:false}))
 app.use(express.json())
