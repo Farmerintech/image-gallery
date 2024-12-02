@@ -103,7 +103,7 @@ const navigate = (page, cPage)=>{
          // console.log(data)  
          for (const img of data.images){
             imageGallery.innerHTML+= `<div class='image-div'>
-               <img src=${img.image} alt=${img.name} />
+               <img src='${img.image}' alt=${img.name} />
                <p>${img.name}</p>
                <p>${img.description}</p>
             </div>`
@@ -159,12 +159,15 @@ displayImages()
                  },
                  body: formData
               })
+              if(!ok){
+               msg.innerText= 'You are not logged in, please log in first' 
+              }
               const data = await resp.json();
               console.log(data)  
               msg.innerText= data.message 
            } catch (error) {
-              msg.innerText= error 
-              console.log(error)
+            msg.innerText= 'You are not logged in, please log in first' 
+            console.log(error)
            }
         }
         
@@ -326,9 +329,6 @@ reg.addEventListener('click', ()=>{
 })
 
 upload.addEventListener('click', ()=>{
-   if(!token || token===''){
-      navigate('login')
-   }   
     navigate('upload')
     localStorage.setItem('current', 'upload')
     if(window.screen.width<=786){navList.style.display="none"}
