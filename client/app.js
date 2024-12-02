@@ -166,11 +166,9 @@ displayImages()
                msg.innerText= data.message 
                msg.style.color='green'
             }
-if(!resp.ok){
-               msg.innerText= 'You are not logged in, please log in first' 
-              }
+
            } catch (error) {
-            msg.innerText= 'server error' 
+            msg.innerText= 'server error' + error 
             console.log(error)
            }
         }
