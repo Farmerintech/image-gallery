@@ -159,12 +159,15 @@ displayImages()
                  },
                  body: formData
               })
-              if(!ok){
+              if(!resp.ok){
                msg.innerText= 'You are not logged in, please log in first' 
               }
               const data = await resp.json();
               console.log(data)  
-              msg.innerText= data.message 
+              if(resp.ok){
+               msg.innerText= data.message 
+               msg.style.color='green'
+            }
            } catch (error) {
             msg.innerText= 'You are not logged in, please log in first' 
             console.log(error)
@@ -250,17 +253,17 @@ const fetchApi = async (URL, formData, page)=>{
        })
        const data = await resp.json();
       //  console.log(data)  
-       msg.innerText= data.message 
-       localStorage.setItem('token', data.token);
+       msg.style.color='green';
+       if(resp.ok){
+         localStorage.setItem('token', data.token);
+         msg.innerText= data.message 
+         navigate(page)
+       }
        setTimeout(()=>{
          localStorage.setItem('token', '');
        }, 360000)
-       msg.style.color='green';
-       if(resp.ok){
-         navigate(page)
-       }
     } catch (error) {
-       msg.innerText= error 
+       msg.innerText= 'server error' 
        console.log(error)
     }
 
