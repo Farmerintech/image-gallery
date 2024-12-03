@@ -163,12 +163,18 @@ displayImages()
                  },
                  body: formData
               })
-              
               const data = await resp.json();
+              if(!resp.ok){
+               msg.innerText= "there is problem uploading this image" 
+            }
+            if(resp.status===401){
+               msg.innerText= data.message 
+            }
               console.log(data)  
               if(resp.ok){
                msg.innerText= data.message 
                msg.style.color='green'
+               return 
             }
 
            } catch (error) {
