@@ -39,13 +39,23 @@ li, a{
     position: relative;
 }
 #image-gallery p{
-    position: absolute;
-    bottom:30px;
-    width:200px
+  display: none; 
 }
-.des{
+.text{
     position: absolute;
-    bottom:10px !important;
+    top:10px;
+    right:10px;
+    background-color: white;
+    box-shadow: 10;
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.text img, .text-2 img{
+    width:20px !important;
+    height:20px !important
 }
 #image-gallery img{
     width:200px;

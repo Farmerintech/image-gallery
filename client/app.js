@@ -94,7 +94,9 @@ const navigate = (page, cPage)=>{
 }
     if(page==='gallery' || cPage==='gallery'){
         current.innerHTML=
-            `<section id="image-gallery"></section>`
+            `<section id="image-gallery">
+               <div class='prev'></div>
+            </section>`
             const imageGallery = document.getElementById('image-gallery');
       displayImages= async ()=>{
       try {
@@ -104,8 +106,10 @@ const navigate = (page, cPage)=>{
          for (const img of data.images){
             imageGallery.innerHTML+= `<div class='image-div'>
                <img src='${img.image}' alt=${img.name} />
-               <p>${img.name}</p>
-               <p class='des'>${img.description}</p>
+                  <div class='text'>
+                     <img src= 'assets/icons8-heart-24.png' alt='images'/>
+                     <!---<img src= 'assets/icons8-eye-24.png' alt='images'/>-->
+                  </div>
             </div>`
          }
       } catch (error) {
@@ -215,7 +219,7 @@ displayImages()
        </section>`
 const submitBtn = document.getElementById('submit');
 const msg = document.getElementById('msg')
-submitBtn.onsubmit = (e)=>{
+submitBtn.onsubmit = async (e)=>{
    e.preventDefault()
    const username = document.getElementById('username');
    const password = document.getElementById('password');
@@ -235,45 +239,40 @@ submitBtn.onsubmit = (e)=>{
       username:username.value,
       password:password.value
    }
-   fetchApi('/api/v1/auth/login', formData, 'gallery')
+   try {
+      const resp = await fetch('/api/v1/auth/login', {
+         method:"POST",
+         headers:{
+            'content-Type':'application/json',
+         },
+         body: JSON.stringify(
+            formData
+         )
+      })
+      const data = await resp.json();
+      if(!resp.ok){
+        msg.innerText= data.message
+      }else{
+        msg.style.color='green';
+        msg.innerText= data.message 
+        setTimeout(() => {
+           navigate('gallery')
+        }, 1500);
+        localStorage.setItem('token', data.token);
+      }
+     //  console.log(data) 
+     setTimeout(() => {
+        localStorage.setItem('token', '');
+        navigate('login')
+     }, 360000);
+   } catch (error) {
+      msg.innerText= 'server error' 
+      console.log(error)
+   }
 }
  
 }
-const fetchApi = async (URL, formData, page)=>{
-    try {
-       const resp = await fetch(URL, {
-          method:"POST",
-          headers:{
-             'content-Type':'application/json',
-          },
-          body: JSON.stringify(
-             formData
-          )
-       })
-       const data = await resp.json();
-      //  console.log(data)  
-       msg.style.color='green';
-       if(!data.token){
-         msg.innerText= `Token expired, please login`
-       }
-       if(resp.ok){
-         localStorage.setItem('token', data.token);
-         msg.innerText= data.message 
-         setTimeout(()=>{
-            navigate(page)
-         }, 1000)
-       }
-       setTimeout(()=>{
-         localStorage.setItem('token', '');
-       }, 360000)
-    } catch (error) {
-       msg.innerText= 'server error' 
-       console.log(error)
-    }
-
- }
-
-      if(page==='register' || cPage==='register'){
+   if(page==='register' || cPage==='register'){
         current.innerHTML= `<section class="login section">
         <p>Register</p>
          <form class="form" id="submit">
@@ -291,7 +290,7 @@ const fetchApi = async (URL, formData, page)=>{
  </section>`
  const submitBtn = document.getElementById('submit');
 const msg = document.getElementById('msg')
-submitBtn.onsubmit = (e)=>{
+submitBtn.onsubmit = async (e)=>{
    e.preventDefault()
    const username = document.getElementById('username');
    const password = document.getElementById('password');
@@ -311,10 +310,39 @@ submitBtn.onsubmit = (e)=>{
       username:username.value,
       password:password.value
    }
- fetchApi('/api/v1/auth/register', formData, 'login')
+   try {
+      const resp = await fetch('/api/v1/auth/register', {
+         method:"POST",
+         headers:{
+            'content-Type':'application/json',
+         },
+         body: JSON.stringify(
+            formData
+         )
+      })
+      const data = await resp.json();
+      if(!resp.ok){
+        msg.innerText= data.message
+      }else{
+        msg.style.color='green';
+        msg.innerText=` ${data.message}, redirecting you to login..`
+        setTimeout(() => {
+           navigate('login')
+        }, 1500);
+      }
+     //  console.log(data) 
+   } catch (error) {
+      msg.innerText= 'server error' 
+      console.log(error)
+   }
 
     }
       }
+
+
+
+
+
 localStorage.setItem('current', page)
 }
 home.addEventListener('click', ()=>{

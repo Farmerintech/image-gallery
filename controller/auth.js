@@ -29,7 +29,7 @@ export const Login = async (req, res) => {
         const {username, password} = req.body
         const  user = await User.findOne({username})
         if(!user){
-            return res.status(500).json({message:"Username does not exit"})
+            return res.status(404).json({message:"Username does not exit"})
         }
         const confirmPsw = await bcrypt.compare(password, user.password);
         if(!confirmPsw){
