@@ -105,7 +105,7 @@ const navigate = (page, cPage)=>{
             imageGallery.innerHTML+= `<div class='image-div'>
                <img src='${img.image}' alt=${img.name} />
                <p>${img.name}</p>
-               <p>${img.description}</p>
+               <p class='des'>${img.description}</p>
             </div>`
          }
       } catch (error) {
@@ -253,6 +253,9 @@ const fetchApi = async (URL, formData, page)=>{
        const data = await resp.json();
       //  console.log(data)  
        msg.style.color='green';
+       if(!data.token){
+         msg.innerText= `Token expired, please login`
+       }
        if(resp.ok){
          localStorage.setItem('token', data.token);
          msg.innerText= data.message 
