@@ -1,13 +1,6 @@
 import { v2 as cloudinary } from 'cloudinary';
 import UploadModel from "../model/upload.model.js";
-
-
-    cloudinary.config({
-        cloud_name:'dtsiyyvu1',
-        api_key:'221554665271299',
-       api_secret:'-52nBO2q64b55uJE8AYTNw_sQOE'
-    });
-    console.log('Cloudinary connected');
+import { connectCloud } from '../config/cloudinary.config.js';
 
 export const uploadImagde = async (req, res) => {
     try {
@@ -23,7 +16,7 @@ export const uploadImagde = async (req, res) => {
         }
 
         // Upload to Cloudinary
-        const result = await cloudinary.uploader.upload(image.path, {
+        const result = await connectCloud.uploader.upload(image.path, {
             folder: 'uploads',
         });
 
