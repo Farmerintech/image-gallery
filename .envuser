@@ -1,4 +1,0 @@
-PORT=8000
-MONGO_URI=mongodb://127.0.0.1:27017/image-upload-api
-SECRETE_KEY="uhwimwkjyhhwyuwpiuuwuioklkg-oowhghhvhwcoiocutyhwbutflkooqytygfooiijvdcyyyeuudzxeqgygfrhjoipokmjjhgniuutrgtgncgjahuuiryfh"
-LIFE_TIME="60m"
