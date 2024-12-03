@@ -1,6 +1,13 @@
 import { v2 as cloudinary } from 'cloudinary';
 import UploadModel from "../model/upload.model.js";
-import { connectCloud } from '../config/cloudinary.config.js';
+
+
+cloudinary.config({ 
+    cloud_name: process.env.CLOUD_NAME, 
+    api_key: process.env.API_KEY, 
+    api_secret: process.env.API_SECRET
+})
+    console.log('Cloudinary connected');
 
 export const uploadImagde = async (req, res) => {
     try {
@@ -16,7 +23,7 @@ export const uploadImagde = async (req, res) => {
         }
 
         // Upload to Cloudinary
-        const result = await connectCloud.uploader.upload(image.path, {
+        const result = await cloudinary.uploader.upload(image.path, {
             folder: 'uploads',
         });
 
