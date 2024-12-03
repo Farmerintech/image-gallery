@@ -165,7 +165,7 @@ displayImages()
               })
               const data = await resp.json();
               if(!resp.ok){
-               msg.innerText= "there is problem uploading this image" 
+               msg.innerText= data.message 
             }
             if(resp.status===401){
                msg.innerText= data.message 
