@@ -182,7 +182,10 @@ displayImages()
            
            )
            const data = await resp.json();
-           // console.log(data)  
+           // console.log(data)
+           if(!resp.ok){
+            imageGallery.innerHTML=`<p>${data.message}</p>`
+           }
            console.log(data.images)
            if(data.message==='No images found.'){
             imageGallery.innerHTML=`<p>${data.message}</p>`
@@ -196,7 +199,6 @@ displayImages()
                     </div>
               </div>`
               let deleteImage = data.images.length >1 ? document.querySelectorAll('.delete'): [document.querySelector('.delete')]
-               console.log(deleteImage)
                deleteImage.forEach((img)=>{
                   img.onclick = async (e)=>{
                      const imageId = e.target.id;
