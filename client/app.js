@@ -184,7 +184,8 @@ displayImages()
            const data = await resp.json();
            // console.log(data)
            if(!resp.ok){
-            imageGallery.innerHTML=`<p>${data.message}</p>`
+            imageGallery.innerHTML=`<p>Make sure you are logged in</p>`
+            navigate('login')
            }
            console.log(data.images)
            if(data.message==='No images found.'){
