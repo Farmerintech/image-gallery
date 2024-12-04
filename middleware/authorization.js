@@ -8,6 +8,7 @@ export const authMiddleware= async (req, res, next) =>{
     try {
         const decoded = jwt.verify(token, process.env.SECRETE_KEY);
         req.user = decoded;
+        console.log(req.user.id)
         next()
     } catch (error) {
        return  res.status(500).json({message:error})

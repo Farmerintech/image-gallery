@@ -1,6 +1,6 @@
 import { v2 as cloudinary } from 'cloudinary';
 import UploadModel from "../model/upload.model.js";
-
+import mongoose from 'mongoose';
 
 cloudinary.config({ 
     cloud_name: process.env.CLOUD_NAME, 
@@ -55,5 +55,48 @@ export const getImages = async (req, res) => {
     }
 };
 
+export const getUserImages = async (req, res) => {
+    try {
+        const images = await UploadModel.find({uploadedBy:new mongoose.Types.ObjectId(req.user)});
+        if (images.length === 0) {
+            return res.status(404).json({ message: "No images found." });
+        }
+        return res.status(200).json({ message: "Images retrieved successfully.", images });
+    } catch (error) {
+        console.error("Error fetching images:", error.message); // Log error safely
+        return res.status(500).json({ message: "Server error.", error: error.message });
+    }
+};
+
+export const updateUserImage = async (req, res) => {
+    try {
+        const image = await UploadModel.findOne({_id:new mongoose.Types.ObjectId(req.params.id), uploadedBy:new mongoose.Types.ObjectId(req.user)});
+        if (!image) {
+            return res.status(404).json({ message: "Image not found." });
+        }
+        const newImage = await UploadModel.findByIdAndUpdate(image._id, req.body, {new:true})
+        return res.status(200).json({ message: "Image retrieved successfully.", newImage });
+    } catch (error) {
+        console.error("Error fetching images:", error.message); // Log error safely
+        return res.status(500).json({ message: "Server error.", error: error.message });
+    }
+};
+
+export const DeleteUserImage = async (req, res) => {
+    try {
+        if(req.file){
+            return res.status(400).json({ message: "You are not allow to update image part." });
+        }
+        const image = await UploadModel.findOne({_id:new mongoose.Types.ObjectId(req.params.imageId), uploadedBy:new mongoose.Types.ObjectId(req.user)});
+        if (!image) {
+            return res.status(404).json({ message: "Image not found." });
+        }
+        const newImage = await UploadModel.findByIdAndDelete(req.params.imageId)
+        return res.status(200).json({ message: "Image deleted successfully." });
+    } catch (error) {
+        console.error("Error fetching images:", error.message); // Log error safely
+        return res.status(500).json({ message: "Server error.", error: error.message });
+    }
+};
 
 

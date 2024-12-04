@@ -35,6 +35,7 @@ export const Login = async (req, res) => {
         if(!confirmPsw){
             return res.status(404).json({message:"Incorrect password"})
         }
+        const id=user._id
         const token = jwt.sign(
             {
                 id:user._id
@@ -44,7 +45,7 @@ export const Login = async (req, res) => {
                 expiresIn:process.env.LIFE_TIME
             }
         ) 
-        return res.status(200).json({message:"Login successful..", token})
+        return res.status(200).json({message:"Login successful..", user:{token, id}})
     } catch (error) {
         console.log(error)
         return res.status(500).json({message:error})

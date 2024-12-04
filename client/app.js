@@ -12,7 +12,7 @@ document.body.innerHTML=`    <nav class="nav-header">
             </div>
             <li class="home">Home</li>
             <li class="gal">gallery</li>
-            <li class="upl">upload</li>
+            <li class="dashboard">Dashboard</li>
             <li class="log">Login</li>
             <li class="reg">Register</li>
         </ul>
@@ -38,9 +38,12 @@ document.body.innerHTML=`    <nav class="nav-header">
 
 const toggleMenu = document.querySelector(".toggle-menu");
 const toggleCancle = document.querySelector(".toggle-cancle");
+const current = document.querySelector('.current');
+let currentPage = localStorage.getItem('current')
 
 toggleCancle.onclick = ()=>{
    navList.style.display="none"
+   navigate(currentPage)
 }
 const navList = document.querySelector(".nav-list")
 toggleMenu.onclick = ()=>{
@@ -48,16 +51,16 @@ toggleMenu.onclick = ()=>{
         navList.style.display="none"
     } else{
         navList.style.display="block"
+        current.innerHTML=``
     }
 
 }
 
 //navigate 
 
-const current = document.querySelector('.current');
 const home = document.querySelector('.home');
 const gallery = document.querySelector('.gal');
-const upload = document.querySelector('.upl');
+const dashboard = document.querySelector('.dashboard');
 const login = document.querySelector('.log');
 const reg = document.querySelector('.reg');
 
@@ -95,7 +98,6 @@ const navigate = (page, cPage)=>{
     if(page==='gallery' || cPage==='gallery'){
         current.innerHTML=
             `<section id="image-gallery">
-               <div class='prev'></div>
             </section>`
             const imageGallery = document.getElementById('image-gallery');
       displayImages= async ()=>{
@@ -105,7 +107,7 @@ const navigate = (page, cPage)=>{
          // console.log(data)  
          for (const img of data.images){
             imageGallery.innerHTML+= `<div class='image-div'>
-               <img src='${img.image}' alt=${img.name} />
+               <img src='${img.image}' alt=${img.name} class='img'/>
                   <div class='text'>
                      <img src= 'assets/icons8-heart-24.png' alt='images'/>
                      <!---<img src= 'assets/icons8-eye-24.png' alt='images'/>-->
@@ -113,8 +115,7 @@ const navigate = (page, cPage)=>{
             </div>`
          }
       } catch (error) {
-         msg.innerText= error 
-         // console.log(error)
+         console.log(error)
       }     
     
 }
@@ -122,10 +123,22 @@ displayImages()
 
  }
 
-    if(page==='upload' || cPage==='upload'){
+    if(page==='dashboard' || cPage==='dashboard'){
         current.innerHTML=
-            `<section id="upload">
-              <form id="upload" enctype="multipart/form-data">
+         `<section id="dashboard">
+                     <p id="msg" style="text-align:center"></p>
+            <ul class='das-nav'>
+               <li class='my-images'>
+                  <img src= 'assets/images.png' alt='images'/>
+               </li>
+               <li class='upload-image'>
+                  <img src= 'assets/upload.png' alt='upload-images'/>
+               </li>
+            </ul>
+            <section id="gallery" class=''>
+            </section>
+            <section id="upload-section" class='upload-section'>
+            <form id="upload" enctype="multipart/form-data">
             <p id="msg"></p>
             <div>
                <input type="file" id="file" placeholder="uplaod image"/>
@@ -138,8 +151,91 @@ displayImages()
             </div>
             <div class="preview"></div>
            <button class="btn">Save</button>
-           </form>   
+           </form>
+           </section> 
         </section>`
+        const showMyImage = document.querySelector('.my-images');
+        const msg = document.getElementById('msg')
+        showMyImage.onclick = ()=> {
+         upload.classList.remove('active');
+         imageGallery.classList.add('active');
+         imageGallery.style.display='flex'
+
+        }
+        const uploadImage = document.querySelector('.upload-image');
+        const upload = document.querySelector('.upload-section');
+        uploadImage.onclick = () =>{
+         imageGallery.classList.remove('active')
+         imageGallery.style.display='none'
+         upload.classList.add('active');
+      }
+        const imageGallery = document.getElementById('gallery');
+        const userId = localStorage.getItem('user')
+        displayImages= async ()=>{
+        try {
+         const token = localStorage.getItem('token')
+           const resp = await fetch(`/api/v1/uploads/${userId}/images`, {
+            headers:{
+               "Authorization":`Bearer ${token}`
+            },
+           }
+           
+           )
+           const data = await resp.json();
+           // console.log(data)  
+           console.log(data.images)
+           if(data.message==='No images found.'){
+            imageGallery.innerHTML=`<p>${data.message}</p>`
+           }else{
+           for (const img of data.images){
+              imageGallery.innerHTML+= `<div class='image-div'>
+                 <img src='${img.image}' alt=${img.name} class='img' id=${img._id}/>
+                    <div class='text'>
+                       <img src= 'assets/edit.png' alt='images'/>
+                      <img src= 'assets/delete.png' alt='images' class='delete' id='${img._id}'/>
+                    </div>
+              </div>`
+              let deleteImage = data.images.length >1 ? document.querySelectorAll('.delete'): [document.querySelector('.delete')]
+               console.log(deleteImage)
+               deleteImage.forEach((img)=>{
+                  img.onclick = async (e)=>{
+                     const imageId = e.target.id;
+                     console.log(imageId)            
+                     try {
+                      const token = localStorage.getItem('token')
+                        const resp = await fetch(`/api/v1/uploads/${userId}/images/${imageId}`, {
+                           method:'DELETE',
+                         headers:{
+                            "Authorization":`Bearer ${token}`
+                         },
+                        }
+                        
+                        )
+                        msg.innerText='deleting....'
+                        const data = await resp.json();
+                        // console.log(data)  
+                        msg.innerText= data.message 
+                        location.reload()
+                        console.log(data.message)
+                     } catch (error) {
+                        msg.innerText= error 
+                        // console.log(error)
+                     }     
+                   
+                  }
+                  
+      
+               })
+           }
+         }
+        } catch (error) {
+           msg.innerText= error 
+           // console.log(error)
+        }     
+      
+  }
+  displayImages()
+
         const fileInput = document.querySelector('#file');
  
         fileInput.addEventListener('change', (e)=>{
@@ -174,6 +270,7 @@ displayImages()
               if(resp.ok){
                msg.innerText= data.message 
                msg.style.color='green'
+               location.reload()
                return 
             }
 
@@ -258,13 +355,15 @@ submitBtn.onsubmit = async (e)=>{
       const data = await resp.json();
       if(!resp.ok){
         msg.innerText= data.message
-      }else{
+        return 
+      }else{        
         msg.style.color='green';
         msg.innerText= data.message 
+        localStorage.setItem('token', data.user.token);
+        localStorage.setItem('user', data.user.id);
         setTimeout(() => {
-           navigate('gallery')
+           navigate('dashboard')
         }, 1500);
-        localStorage.setItem('token', data.token);
       }
      //  console.log(data) 
      setTimeout(() => {
@@ -369,9 +468,9 @@ reg.addEventListener('click', ()=>{
 
 })
 
-upload.addEventListener('click', ()=>{
-    navigate('upload')
-    localStorage.setItem('current', 'upload')
+dashboard.addEventListener('click', ()=>{
+    navigate('dashboard')
+    localStorage.setItem('current', 'dashboard')
     if(window.screen.width<=786){navList.style.display="none"}
 })
 gallery.addEventListener('click', ()=>{
@@ -381,7 +480,6 @@ gallery.addEventListener('click', ()=>{
 
 })
 
-let currentPage = localStorage.getItem('current')
 
 navigate(currentPage, currentPage)
 
