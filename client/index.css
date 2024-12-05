@@ -69,6 +69,23 @@ header{
 .toggle-menu, .toggle-cancle{
     display: none;
 }
+.hero-title {
+  
+    animation: fadeInLeftBig; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 2s; /* don't forget to set a duration! */
+  }
+  .hero-text, .her0-btn{
+    animation: fadeInUp; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 2s 
+  }
+  .hero-img{
+    animation: fadeInRight; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 2s
+  }
+  img{
+    animation: pulse; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 2s
+  }
 @media(max-width:786px){
     header{
         padding: 10px;

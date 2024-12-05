@@ -66,7 +66,7 @@ const reg = document.querySelector('.reg');
 current.innerHTML =
 `<section class="hero">
    <div class="">
-    <h2 class="hero-title">Get <span class="sixty">60%</span> jackpot deal on all outfits</h2>
+    <h2 class="hero-title>Get <span class="sixty">60%</span> jackpot deal on all outfits</h2>
    <p class="hero-text">
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vulputate, risus nec vestibulum blandit, enim ex placerat erat, id luctus purus justo eget mauris. 
   </p>
@@ -239,6 +239,7 @@ displayImages()
            // console.log(data)
            if(!resp.ok){
             imageGallery.innerHTML=`<p>Make sure you are logged in</p>`
+            navigate('login')
            }
            if(data.message==='No images found.'){
             imageGallery.innerHTML=`<p>${data.message}</p>`
