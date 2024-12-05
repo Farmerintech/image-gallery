@@ -35,7 +35,6 @@ document.body.innerHTML=`    <nav class="nav-header">
 </section>
 `
 
-
 const toggleMenu = document.querySelector(".toggle-menu");
 const toggleCancle = document.querySelector(".toggle-cancle");
 const current = document.querySelector('.current');
@@ -100,11 +99,13 @@ const navigate = (page, cPage)=>{
             `<section id="image-gallery">
             </section>`
             const imageGallery = document.getElementById('image-gallery');
+            imageGallery.innerText= 'Fetching images...'
       displayImages= async ()=>{
       try {
          const resp = await fetch('/api/v1/uploads')
          const data = await resp.json();
          // console.log(data)  
+         imageGallery.innerText= ''
          for (const img of data.images){
             imageGallery.innerHTML+= `<div class='image-div'>
                <img src='${img.image}' alt=${img.name} class='img'/>
@@ -124,16 +125,25 @@ displayImages()
  }
 
     if(page==='dashboard' || cPage==='dashboard'){
+      const user = localStorage.getItem('user');
         current.innerHTML=
          `<section id="dashboard">
+         <h3 class='user'>Hi, ${user}</h3>
                      <p id="msg" style="text-align:center"></p>
             <ul class='das-nav'>
                <li class='my-images'>
-                  <img src= 'assets/images.png' alt='images'/>
+                  <img src= 'assets/images.png' alt='images  class=''/>
+                  <p class='img-txt'>My images</p>
                </li>
                <li class='upload-image'>
                   <img src= 'assets/upload.png' alt='upload-images'/>
+                  <p class='img-txt-2'>Upload image</p>
                </li>
+               <li class='logout'>
+                  <img src= 'assets/logout.png' alt='images  class=''/>
+                  <p class='img-txt-3'>Logout</p>
+               </li>
+
             </ul>
             <section id="gallery" class=''>
             </section>
@@ -156,6 +166,18 @@ displayImages()
         </section>`
         const showMyImage = document.querySelector('.my-images');
         const msg = document.getElementById('msg')
+        const logout = document.querySelector('.logout');
+        console.log(user)
+        if(user === ''){
+        navigate('login')
+  }  
+        logout.onclick = () =>{
+         localStorage.setItem('user', '');
+         localStorage.setItem('token', '');
+         localStorage.setItem('user', '');
+         localStorage.setItem('userId', ''); 
+         navigate('login')
+        }
         showMyImage.onclick = ()=> {
          upload.classList.remove('active');
          imageGallery.classList.add('active');
@@ -170,9 +192,10 @@ displayImages()
          upload.classList.add('active');
       }
         const imageGallery = document.getElementById('gallery');
-        const userId = localStorage.getItem('user')
+        const userId= localStorage.getItem('userId')
         displayImages= async ()=>{
-        try {
+         imageGallery.innerHTML=`<p>Fetching Images.....</p>`
+         try {
          const token = localStorage.getItem('token')
            const resp = await fetch(`/api/v1/uploads/${userId}/images`, {
             headers:{
@@ -181,13 +204,12 @@ displayImages()
            }
            
            )
+           imageGallery.innerHTML=``
            const data = await resp.json();
            // console.log(data)
            if(!resp.ok){
             imageGallery.innerHTML=`<p>Make sure you are logged in</p>`
-            navigate('login')
            }
-           console.log(data.images)
            if(data.message==='No images found.'){
             imageGallery.innerHTML=`<p>${data.message}</p>`
            }else{
@@ -195,7 +217,7 @@ displayImages()
               imageGallery.innerHTML+= `<div class='image-div'>
                  <img src='${img.image}' alt=${img.name} class='img' id=${img._id}/>
                     <div class='text'>
-                       <img src= 'assets/edit.png' alt='images'/>
+                      <img src= 'assets/edit.png' alt='images'/>
                       <img src= 'assets/delete.png' alt='images' class='delete' id='${img._id}'/>
                     </div>
               </div>`
@@ -203,7 +225,7 @@ displayImages()
                deleteImage.forEach((img)=>{
                   img.onclick = async (e)=>{
                      const imageId = e.target.id;
-                     console.log(imageId)            
+                     msg.innerText= 'deleting image...'
                      try {
                       const token = localStorage.getItem('token')
                         const resp = await fetch(`/api/v1/uploads/${userId}/images/${imageId}`, {
@@ -252,6 +274,7 @@ displayImages()
            fileReader.readAsDataURL(file)
         })
         const UploadApi = async (URL, formData)=>{
+         msg.innerText= 'Sending...'
            try {
               const token = localStorage.getItem('token')
               console.log(token)
@@ -345,6 +368,7 @@ submitBtn.onsubmit = async (e)=>{
       username:username.value,
       password:password.value
    }
+   msg.innerText= 'Loading...'
    try {
       const resp = await fetch('/api/v1/auth/login', {
          method:"POST",
@@ -358,12 +382,13 @@ submitBtn.onsubmit = async (e)=>{
       const data = await resp.json();
       if(!resp.ok){
         msg.innerText= data.message
-        return 
       }else{        
         msg.style.color='green';
         msg.innerText= data.message 
         localStorage.setItem('token', data.user.token);
-        localStorage.setItem('user', data.user.id);
+        localStorage.setItem('user', data.user.username);
+        localStorage.setItem('userId', data.user.id);
+      //   console.log(data.user)
         setTimeout(() => {
            navigate('dashboard')
         }, 1500);
@@ -371,6 +396,8 @@ submitBtn.onsubmit = async (e)=>{
      //  console.log(data) 
      setTimeout(() => {
         localStorage.setItem('token', '');
+        localStorage.setItem('user', '');
+        localStorage.setItem('userId', '');
         navigate('login')
      }, 360000);
    } catch (error) {
@@ -418,6 +445,7 @@ submitBtn.onsubmit = async (e)=>{
       username:username.value,
       password:password.value
    }
+   msg.innerText= 'Loading...'
    try {
       const resp = await fetch('/api/v1/auth/register', {
          method:"POST",

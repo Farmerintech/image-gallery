@@ -121,7 +121,7 @@ form{
     flex-direction: column;
     justify-content: center;
     width: 30px;
-    height:100px;
+    height:150px;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.342);
     position: fixed;
     left:20px;
@@ -133,10 +133,73 @@ form{
     z-index: 20;
 }
 
-.my-images img, .upload-image img{
+.my-images img, .upload-image img, .logout img{
     width: 25px;
     height: 25px;
 }
 .my-images img:hover, .upload-image img:hover{
-    width: 28px;
+}
+.user{
+    padding: 10px;
+    text-align: center;
+}
+.img-txt{
+    position: absolute;
+    bottom:67%; /* Position above the icon */
+    left: 110%;
+    z-index: 10;
+    transform: translateX(-20%);
+    background-color: gray;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  
+
+}
+.img-txt-2{
+    position: absolute;
+    bottom: 35%; /* Position above the icon */
+    left: 80%;
+    z-index: 10;
+    transform: translateX(-5%);
+    background-color: gray;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  
+
+}
+
+.img-txt-3{
+    position: absolute;
+    bottom: 2%; /* Position above the icon */
+    left: 80%;
+    z-index: 10;
+    transform: translateX(-2%);
+    background-color: gray;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  
+
+}
+
+.my-images:hover .img-txt, .logout:hover .img-txt-3, .upload-image:hover .img-txt-2{
+    opacity: 1;
+    visibility: visible;
 }
