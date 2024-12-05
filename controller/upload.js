@@ -44,7 +44,7 @@ export const uploadImagde = async (req, res) => {
 
 export const getImages = async (req, res) => {
     try {
-        const images = await UploadModel.find();
+        const images = await UploadModel.find().populate('uploadedBy');
         if (images.length === 0) {
             return res.status(404).json({ message: "No images found." });
         }

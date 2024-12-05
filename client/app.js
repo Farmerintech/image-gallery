@@ -105,20 +105,49 @@ const navigate = (page, cPage)=>{
          const resp = await fetch('/api/v1/uploads')
          const data = await resp.json();
          // console.log(data)  
-         imageGallery.innerText= ''
+         imageGallery.innerHTML= `<div class='preview-img'>Fetching</div>`
          for (const img of data.images){
             imageGallery.innerHTML+= `<div class='image-div'>
-               <img src='${img.image}' alt=${img.name} class='img'/>
+               <img src='${img.image}' alt='${img.name}' id='${img.uploadedBy.username}' name='${img.description}' class='img'/>
                   <div class='text'>
                      <img src= 'assets/icons8-heart-24.png' alt='images'/>
                      <!---<img src= 'assets/icons8-eye-24.png' alt='images'/>-->
                   </div>
             </div>`
          }
+         let Image = data.images.length >1 ? document.querySelectorAll('.image-div'): [document.querySelector('.delete')]
+         Image.forEach((img)=>{
+            img.onclick = (e)=>{
+               console.log(e.target)
+               const realImage = e.target;
+               const preview = document.querySelector('.preview-img')
+               preview.style.display='block'; 
+               preview.innerHTML= `
+               <div class='cancle-icon'>
+                 <img src= 'assets/cancle.svg' alt='images'/>
+               </div>
+               <div class='flex'>
+                  <img src='${realImage.src}' alt=${realImage.name} class='img'/>
+                  <div>
+                  <h4>${realImage.alt}</h4>
+                  <p>Image uploaded by ${realImage.id}</p>
+                  </div>
+               </div>
+               
+               `
+               const cancle = document.querySelector('.cancle-icon');
+               cancle.onclick=()=>{
+                  preview.style.display='none'; 
+               }   
+            }
+         })   
+      if(!resp.ok){
+         imageGallery.innerText= 'Error fetching images'
+      }
       } catch (error) {
          console.log(error)
+         imageGallery.innerText= 'Error fetching images'
       }     
-    
 }
 displayImages()
 
@@ -170,6 +199,7 @@ displayImages()
         console.log(user)
         if(user === ''){
         navigate('login')
+        if(window.screen.width<=786){navList.style.display="none"}
   }  
         logout.onclick = () =>{
          localStorage.setItem('user', '');
@@ -243,7 +273,7 @@ displayImages()
                         location.reload()
                         console.log(data.message)
                      } catch (error) {
-                        msg.innerText= error 
+                        msg.innerText= '' 
                         // console.log(error)
                      }     
                    
@@ -254,7 +284,7 @@ displayImages()
            }
          }
         } catch (error) {
-           msg.innerText= error 
+           msg.innerText= '' 
            // console.log(error)
         }     
       
