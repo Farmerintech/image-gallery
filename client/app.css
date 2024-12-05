@@ -61,15 +61,10 @@ li, a{
     flex-direction: column;
     height: auto;
     cursor: pointer;
-    display: none;
 }
 .text img{
     width:20px;
     height:20px;
-}
-.image-div:hover .text{
-    display: flex;
-    
 }
 .img{
     width:200px;
@@ -99,14 +94,12 @@ form{
 }
 .submit, .btn{
     margin-top: 5px;
-    width:100px;
-    height:50px;
     padding:10px;
     outline: none; 
     border:none;
-    background-color: darkblue;  
+    background-color: red;  
     color:white;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 @media(max-width:760px){
     input{
