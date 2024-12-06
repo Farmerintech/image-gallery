@@ -75,7 +75,18 @@ current.innerHTML =
   <div class="hero-img">
     <img src="assets/hero.png" alt="" class="">
   </div>
-</section>`
+  
+</section>
+<main>
+ <div class="masonry-grid">
+        <div class="grid-item wide"><img src="assets/yellow-girl.jpg" alt="Image 1"></div>
+        <div class="grid-item tall"><img src="assets/hero-img.jpg" alt="Image 2"></div>
+        <div class="grid-item"><img src="assets/cam.jpg" alt="Image 3"></div>
+        <div class="grid-item"><img src="assets/cam-pix.jpg" alt="Image 4"></div>
+        <div class="grid-item wide"><img src="assets/woman.webp" alt="Image 5"></div>
+      </div>
+   </main>
+`
 
 const navigate = (page, cPage)=>{
    document.title=page;
@@ -92,7 +103,18 @@ const navigate = (page, cPage)=>{
               <div class="hero-img">
                 <img src="assets/hero.png" alt="" class="">
               </div>
-            </section>`
+            </section>
+   <main>
+<div class="masonry-grid">
+    <div class="grid-item wide"><img src="assets/yellow-girl.jpg" alt="Image 1"></div>
+    <div class="grid-item tall"><img src="assets/hero-img.jpg" alt="Image 2"></div>
+    <div class="grid-item"><img src="assets/cam.jpg" alt="Image 3"></div>
+    <div class="grid-item"><img src="assets/cam-pix.jpg" alt="Image 4"></div>
+    <div class="grid-item wide"><img src="assets/woman.webp" alt="Image 5"></div>
+  </div>
+</main>
+
+            `
 }
     if(page==='gallery' || cPage==='gallery'){
         current.innerHTML=
