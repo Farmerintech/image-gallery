@@ -156,7 +156,7 @@ header{
 
 .hero-img img {
     max-width: 100%; /* Ensure the image is responsive */
-    height: auto; /* Maintain aspect ratio */
+    height: auto; /* main-sectiontain aspect ratio */
 }
 
 /* Media query for smaller screens */
@@ -179,6 +179,9 @@ header{
         font-size: 0.9rem;
         text-align: left !important;
     }
+    .main{
+        width: 100%;
+    }
 }
 .hero-btn{
     background-color: red;
@@ -191,114 +194,223 @@ header{
 }
 
   
-  .masonry-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
-  }
-  
-  .grid-item {
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.main{
     position: relative;
-  }
-  
-  .grid-item img {
-    width: 100%;
-    height:auto;
-    object-fit: cover;
-    display: block;
-  }
-  
-  /* Define item sizes */
-  .grid-item.wide {
-    grid-column: span 2;
-    grid-row: span 1;
-  }
-  
-  .grid-item.tall {
-    grid-column: span 1;
-    grid-row: span 2;
-  }
-  
-  /* Hover effect */
-  .grid-item img:hover {
-    transform: scale(1.1);
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  /* Modify layout for larger screens */
-
-  
-
-  .masonry-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
-  }
-  
-  .grid-item {
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    position: relative;
-  }
-  
-  .grid-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  
-  /* Define item sizes */
-  .grid-item.wide {
-    grid-column: span 2;
-    grid-row: span 1;
-  }
-  
-  .grid-item.tall {
-    grid-column: span 1;
-    grid-row: span 2;
-  }
-  
-  /* Hover effect */
-  .grid-item img:hover {
-    transform: scale(1.1);
-    transition: transform 0.3s ease-in-out;
-  }
-  main{
+    left:50%;
+    width: 50%;
+    transform: translate(-50%);
+}
+  .main-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap:10px;
     padding: 10px;
   }
-  @media (min-width: 1024px) {
-    /* Dynamic layout for large screens */
-    main{
-        padding: 20px;
-    }
-    .grid-item:nth-child(1) {
-      grid-column: span 2; /* First image spans 2 columns */
-      grid-row: span 2;    /* Spans 2 rows */
-    }
-  
-    .grid-item:nth-child(2) {
-      grid-column: span 3; /* Second image spans 4 columns */
-      grid-row: span 1;    /* Stays in one row */
-    }
-  
-    .grid-item:nth-child(3) {
-      grid-column: span 2; /* Third image spans 2 columns */
-      grid-row: span ;    /* Spans 2 rows */
-    }
-  
-    .grid-item:nth-child(4) {
-      grid-column: span 2 ; /* Fourth image spans 2 columns */
-      grid-row: span 1;    /* Stays in one row */
-    }
-  
-    .grid-item:nth-child(5) {
-      grid-column: span 3; /* Fifth image spans 2 columns */
-      grid-row: span 1;    /* Stays in one row */
-    }
+  .main-section img{
+    width: 48%;
+    border-radius: 10px;
+  }
+  .img-1 img{
+    width: 100%;
   }
   
+  .img-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap:10px;
+  }
+
+.contact img{
+    width:200px;
+    height: 200px;
+    border-radius: 50%;
+}
+.contact{
+    display: flex;
+    justify-content: space-around;
+    gap:20px
+}
+.user{
+    max-width: 300px;
+    background-color: white;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.23);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    animation: backInLeft; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 2s; 
+}
+
+.user img{
+    width:100px;
+    height:100px;
+    border-radius: 50%;
+}
+.user p, h3{
+    text-align: left;
+}
+
+@media(max-width:786px){
+    .main{
+        position: realtive;
+        left:0%;
+        width: 100%;
+        transform: translate(0%)
+    }
+    .main-section{
+      flex-direction: column;
+      }
+    .main-section .img-1{
+      width: 100%;
+    }
+    .img-1 img{
+      width: 100%;
+    }
+    .contact{
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+    }
+  }
+.message{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    gap:10px
+}
+footer{
+    padding: 20px;
+    background-color: rgba(12, 129, 71, 0.377);
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    margin-top: 30px;
+}
+footer input, footer button, footer textarea{
+    width: 300px;
+    padding: 10px;
+    background-color: #222;
+    outline: none;
+    border: 2px solid grey;
+    border-radius: 5px;
+    
+}
+footer button{
+    background-color: red;
+    border: none;
+    color: white;
+}
+textarea {
+    width: 300px;            /* Set the width */
+    height: 150px;           /* Set the height */
+    border: 2px solid #ccc; /* Set a border */
+    border-radius: 4px;     /* Round the corners */
+    padding: 10px; 
+}
+
+/* General Styling for Footer */
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer-logo h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.footer-links ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-links ul li {
+    margin: 10px 0;
+}
+
+.footer-links ul li a {
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.footer-links ul li a:hover {
+    color: #4CAF50;
+}
+
+.footer-social {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-social .social-icon {
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+.footer-social .social-icon:hover {
+    color: #4CAF50;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+    color: #222;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-logo {
+        margin-bottom: 20px;
+    }
+
+    .footer-links ul {
+        padding: 0;
+    }
+
+    .footer-links ul li {
+        margin: 5px 0;
+    }
+
+    .footer-social {
+        gap: 10px;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-logo h2 {
+        font-size: 20px;
+    }
+
+    .footer-links ul li a {
+        font-size: 14px;
+    }
+
+    .footer-social .social-icon {
+        font-size: 16px;
+    }
+
+    .footer-bottom p {
+        font-size: 12px;
+    }
+}
