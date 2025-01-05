@@ -110,8 +110,8 @@ current.innerHTML =
     </div>
 </div>
 
-<footer>
-
+<footer >
+<div class="footer">
             <div class="footer-links">
                 <ul>
                     <li><a href="#">Home</a></li>
@@ -140,7 +140,6 @@ current.innerHTML =
         </div>
 
 </footer>
-
 `
 
 
