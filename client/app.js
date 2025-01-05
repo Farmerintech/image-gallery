@@ -329,9 +329,7 @@ displayImages()
         const msg = document.getElementById('msg')
         const logout = document.querySelector('.logout');
         console.log(user)
-        if(localStorage.getItem('user') === ''){
-        navigate('login')
-        }
+       
         if(window.screen.width<=786){navList.style.display="none"}
   
         logout.onclick = () =>{
