@@ -194,8 +194,8 @@ const navigate = (page, cPage)=>{
     </div>
 </div>
 
-<footer>
-
+<footer >
+<div class="footer">
             <div class="footer-links">
                 <ul>
                     <li><a href="#">Home</a></li>
@@ -332,8 +332,9 @@ displayImages()
         console.log(user)
         if(localStorage.getItem('user') === ''){
         navigate('login')
+        }
         if(window.screen.width<=786){navList.style.display="none"}
-  }  
+  
         logout.onclick = () =>{
          localStorage.setItem('user', '');
          localStorage.setItem('token', '');

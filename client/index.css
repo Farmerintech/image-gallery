@@ -316,7 +316,13 @@ textarea {
 }
 
 /* General Styling for Footer */
-
+.footer{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    place-content: center;
+    gap: 10px;
+}
 .footer-container {
     display: flex;
     justify-content: space-around;
