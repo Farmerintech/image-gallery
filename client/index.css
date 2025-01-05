@@ -357,7 +357,8 @@ textarea {
 
 .footer-social {
     display: flex;
-    gap: 20px;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .footer-social .social-icon {
