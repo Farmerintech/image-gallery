@@ -64,32 +64,85 @@ const login = document.querySelector('.log');
 const reg = document.querySelector('.reg');
 
 current.innerHTML =
-`<section class="hero">
-   <div class="">
-    <h2 class="hero-title>Get <span class="sixty">60%</span> jackpot deal on all outfits</h2>
-   <p class="hero-text">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vulputate, risus nec vestibulum blandit, enim ex placerat erat, id luctus purus justo eget mauris. 
-  </p>
-  <button class="hero-btn">Shop Now</button>
-  </div>
-  <div class="hero-img">
-    <img src="assets/hero.png" alt="" class="">
-  </div>
-  
-</section>
-<main class='main'>
+            `<section class="hero">
+               <div class="">
+                <h2 class="hero-title">Get <span class="sixty">60%</span> jackpot deal on all outfits</h2>
+               <p class="hero-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vulputate, risus nec vestibulum blandit, enim ex placerat erat, id luctus purus justo eget mauris. 
+              </p>
+              <button class="hero-btn">Shop Now</button>
+              </div>
+              <div class="hero-img">
+                <img src="assets/hero.png" alt="" class="">
+              </div>
+            </section>
 
-<section class='img-grid'>
+<main class='main'>
+<section class='main-section'>
+<div class='img-grid'>
   <div class='img-1'>
-    <img src="assets/yellow-girl.jpg" alt="Image 1">
+    <img src="assets/hero-img.jpg" alt="Image 1">
   </div>
   <div class='img-2'>
-    <img src="assets/hero-img.jpg" alt="Image 2">
+    <img src="assets/yellow-girl.jpg" alt="Image 2">
     <img src="assets/cam.jpg" alt="Image 3">
   </div>
+</div>
+<div class='img-grid'>
+  <div class='img-1'>
+    <img src="assets/engine-girl.jpg" alt="Image 1">
+  </div>
+  <div class='img-2'>
+    <img src="assets/woman.webp" alt="Image 2">
+    <img src="assets/boy.jpg" alt="Image 3">
+  </div>
+</div>
 </section>
 </main>
+<div class='contact'>
+    <img src="assets/view.jpg" alt="Image 3">
+    <div class='user'>
+    <div >
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+    <h3>Farmerintech</h3>
+    </div>
+    <img src="assets/view-2.jpg" alt="Image 3">
+    </div>
+</div>
+
+<footer>
+
+            <div class="footer-links">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+               <div class="footer-links">
+                <ul>
+                    <li><a href="#">Gallery</a></li>
+                    <li><a href="#">Login</a></li>
+                    <li><a href="#">Register</a></li>
+                    <li><a href="#">Dashboard</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-social">
+                <a href="#" class="social-icon">Facebook</a>
+                <a href="#" class="social-icon">Twitter</a>
+                <a href="#" class="social-icon">Instagram</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Farmerintech. All rights reserved.</p>
+        </div>
+
+</footer>
+
 `
+
 
 const navigate = (page, cPage)=>{
    document.title=page;
@@ -142,12 +195,6 @@ const navigate = (page, cPage)=>{
 </div>
 
 <footer>
-        <div class="footer-container">
-            <div class='message'>
-<input type='text' placeholder='Enter email..'/>
-<textarea col='50' row='50'></textarea>
-<button>Send Message</button>
-</div>
 
             <div class="footer-links">
                 <ul>
