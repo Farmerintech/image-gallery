@@ -330,7 +330,7 @@ displayImages()
         const msg = document.getElementById('msg')
         const logout = document.querySelector('.logout');
         console.log(user)
-        if(user === ''){
+        if(localStorage.getItem('user') === ''){
         navigate('login')
         if(window.screen.width<=786){navList.style.display="none"}
   }  
@@ -553,9 +553,9 @@ submitBtn.onsubmit = async (e)=>{
         localStorage.setItem('user', data.user.username);
         localStorage.setItem('userId', data.user.id);
       //   console.log(data.user)
-        setTimeout(() => {
+        
            navigate('dashboard')
-        }, 1500);
+        
       }
      //  console.log(data) 
      setTimeout(() => {
